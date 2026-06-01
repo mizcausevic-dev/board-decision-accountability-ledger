@@ -1,0 +1,238 @@
+[
+  {
+    "id": "ai-owner-ledger",
+    "lane": "AI governance and agent readiness",
+    "track": "AI_GOVERNANCE",
+    "action": "LOCK_OWNER",
+    "accountabilityTheme": "AI packets are moving, but the permanent owner-of-record still gets overwritten by last-minute policy and security overrides.",
+    "boardQuestion": "Which AI lane needs a stable owner ledger before the board trusts the next approval packet?",
+    "owner": "Chief AI Officer",
+    "audience": "Board risk committee",
+    "currentPosture": "AI controls are visible, but the owner ledger still changes too often for a board-safe continuity story.",
+    "accountabilityHeadline": "AI accountability continuity is weaker than the board packet suggests.",
+    "accountabilitySignal": "Owner-of-record entries are being replaced too often between policy, security, and product.",
+    "ownerOfRecord": "AI governance operations lead",
+    "requiredEvidence": [
+      "owner ledger",
+      "override history",
+      "approval closeout chain"
+    ],
+    "relatedSurfaces": [
+      "scorecard.kineticgain.com",
+      "memo.kineticgain.com",
+      "agents.kineticgain.com"
+    ],
+    "companyTags": [
+      "OpenAI",
+      "Anthropic",
+      "Microsoft"
+    ],
+    "decisionHandoffs": 4,
+    "ownershipGaps": 2,
+    "overrideEvents": 3,
+    "ledgerCoverageScore": 56,
+    "decisionClarityScore": 59,
+    "boardConfidenceScore": 63,
+    "valueAtStakeMillions": 28,
+    "headline": "AI lanes need a durable owner ledger before the next board packet expands scope.",
+    "narrative": "The board should force the AI owner-of-record model to persist across the full approval chain.",
+    "nextMove": "Lock one AI owner ledger and require override logging instead of implicit owner changes."
+  },
+  {
+    "id": "identity-override-record",
+    "lane": "Identity and access governance",
+    "track": "IDENTITY",
+    "action": "RECORD_OVERRIDE",
+    "accountabilityTheme": "Identity exceptions close slowly because override events are not being written back into one trusted accountability ledger.",
+    "boardQuestion": "Which identity lane needs a cleaner override record before another exception cycle starts?",
+    "owner": "Chief Information Security Officer",
+    "audience": "Audit committee",
+    "currentPosture": "Identity accountability exists, but override visibility is still too patchy when audit and security diverge.",
+    "accountabilityHeadline": "Identity overrides are happening faster than the ledger can explain them.",
+    "accountabilitySignal": "Final calls are being made, but the owner-of-record history is incomplete after committee overrides.",
+    "ownerOfRecord": "Identity governance director",
+    "requiredEvidence": [
+      "override record",
+      "exception approval log",
+      "owner continuity report"
+    ],
+    "relatedSurfaces": [
+      "certs.kineticgain.com",
+      "guest.kineticgain.com",
+      "protect.kineticgain.com"
+    ],
+    "companyTags": [
+      "Microsoft",
+      "Entra",
+      "Okta"
+    ],
+    "decisionHandoffs": 4,
+    "ownershipGaps": 2,
+    "overrideEvents": 2,
+    "ledgerCoverageScore": 53,
+    "decisionClarityScore": 52,
+    "boardConfidenceScore": 55,
+    "valueAtStakeMillions": 17,
+    "headline": "Identity needs a fuller override ledger before the next audit packet lands.",
+    "narrative": "The board should require identity overrides to write back into one continuity ledger, not separate committee notes.",
+    "nextMove": "Record every identity override into one owner continuity ledger before the next exception window."
+  },
+  {
+    "id": "revenue-gap-patch",
+    "lane": "Revenue systems and reporting",
+    "track": "REVENUE_SYSTEMS",
+    "action": "PATCH_GAP",
+    "accountabilityTheme": "Revenue packets reopen because the handoff chain is recorded, but the missing ownership gaps are never patched back into one ledger.",
+    "boardQuestion": "Which reporting lane needs its owner gaps patched before another forecast packet loops back to the board?",
+    "owner": "Chief Revenue Officer",
+    "audience": "Board finance committee",
+    "currentPosture": "The revenue lane is measurable, but accountability continuity remains incomplete across finance and commercial signoffs.",
+    "accountabilityHeadline": "Revenue ownership gaps are staying open across repeated forecast cycles.",
+    "accountabilitySignal": "The board packet shows who reviewed the decision, but not who still owns it after the last reopen.",
+    "ownerOfRecord": "Revenue systems lead",
+    "requiredEvidence": [
+      "owner continuity report",
+      "forecast reopen log",
+      "review gap table"
+    ],
+    "relatedSurfaces": [
+      "powerbi.kineticgain.com",
+      "yield.kineticgain.com",
+      "martech.kineticgain.com"
+    ],
+    "companyTags": [
+      "Power BI",
+      "Tableau",
+      "VWO"
+    ],
+    "decisionHandoffs": 5,
+    "ownershipGaps": 2,
+    "overrideEvents": 2,
+    "ledgerCoverageScore": 50,
+    "decisionClarityScore": 54,
+    "boardConfidenceScore": 51,
+    "valueAtStakeMillions": 25,
+    "headline": "Revenue packets need their open ownership gaps patched before another cycle starts.",
+    "narrative": "The board should not accept another reopened forecast packet without a patched owner continuity ledger.",
+    "nextMove": "Patch the owner continuity gaps across finance and commercial signoff before the next forecast review."
+  },
+  {
+    "id": "fintech-review-drift",
+    "lane": "FinTech diligence and transaction controls",
+    "track": "FINTECH",
+    "action": "REVIEW_DRIFT",
+    "accountabilityTheme": "FinTech scope looks active, but accountability drift is compounding because too many reviews are changing the owner path without a stable ledger.",
+    "boardQuestion": "Which capital-sensitive lane needs an accountability-drift review before it can add more scope?",
+    "owner": "Chief Financial Officer",
+    "audience": "Investment committee",
+    "currentPosture": "FinTech surfaces are credible, but the accountability story is still too unstable for more expansion.",
+    "accountabilityHeadline": "FinTech accountability drift is now a scope-quality problem, not just a process problem.",
+    "accountabilitySignal": "Merchant, treasury, and KYC reviews are all adjusting owner responsibility without a single continuity ledger.",
+    "ownerOfRecord": "Finance transformation lead",
+    "requiredEvidence": [
+      "accountability drift log",
+      "override map",
+      "owner continuity history"
+    ],
+    "relatedSurfaces": [
+      "payments.kineticgain.com",
+      "merchant.kineticgain.com",
+      "treasury.kineticgain.com",
+      "kyc.kineticgain.com"
+    ],
+    "companyTags": [
+      "Stripe",
+      "Adyen",
+      "Plaid"
+    ],
+    "decisionHandoffs": 6,
+    "ownershipGaps": 3,
+    "overrideEvents": 4,
+    "ledgerCoverageScore": 45,
+    "decisionClarityScore": 46,
+    "boardConfidenceScore": 47,
+    "valueAtStakeMillions": 33,
+    "headline": "FinTech accountability drift is outrunning the current owner ledger.",
+    "narrative": "The board should review accountability drift before approving another FinTech scope expansion.",
+    "nextMove": "Review the FinTech accountability-drift path and freeze owner changes until the ledger is stable."
+  },
+  {
+    "id": "procurement-continuity-reference",
+    "lane": "Procurement, trust, and buyer proof",
+    "track": "PROCUREMENT",
+    "action": "LOCK_OWNER",
+    "accountabilityTheme": "Procurement remains the cleanest accountability lane and can serve as the reference continuity model.",
+    "boardQuestion": "Which lane already shows stable owner continuity and can be copied elsewhere?",
+    "owner": "Chief Commercial Officer",
+    "audience": "Board growth committee",
+    "currentPosture": "Procurement closes cleanly because owner continuity survives reviews and overrides are written back into one ledger.",
+    "accountabilityHeadline": "Procurement already behaves like the accountability reference model.",
+    "accountabilitySignal": "Trust and commercial packets close with a consistent owner-of-record and low drift.",
+    "ownerOfRecord": "Trust center owner",
+    "requiredEvidence": [
+      "continuity ledger",
+      "override record",
+      "packet closeout chain"
+    ],
+    "relatedSurfaces": [
+      "procurement.kineticgain.com",
+      "questionnaire.kineticgain.com",
+      "trust.kineticgain.com"
+    ],
+    "companyTags": [
+      "Vanta",
+      "Drata",
+      "Google"
+    ],
+    "decisionHandoffs": 2,
+    "ownershipGaps": 0,
+    "overrideEvents": 0,
+    "ledgerCoverageScore": 87,
+    "decisionClarityScore": 84,
+    "boardConfidenceScore": 83,
+    "valueAtStakeMillions": 12,
+    "headline": "Procurement shows the accountability-ledger pattern the rest of the estate should copy.",
+    "narrative": "Use procurement as the reference lane for owner continuity and override discipline.",
+    "nextMove": "Reuse the procurement continuity ledger in one constrained adjacent lane."
+  },
+  {
+    "id": "biotech-ledger-discipline",
+    "lane": "Biotech and diagnostics control lanes",
+    "track": "BIOTECH",
+    "action": "LOCK_OWNER",
+    "accountabilityTheme": "Regulated control lanes still depend on one-off owner resets instead of a durable accountability ledger.",
+    "boardQuestion": "Which regulated lane needs a stronger owner-of-record ledger before the board scales another control family?",
+    "owner": "Quality systems lead",
+    "audience": "Board compliance committee",
+    "currentPosture": "Biotech controls are convincing, but accountability continuity is still too distributed across quality, compliance, and operations.",
+    "accountabilityHeadline": "Biotech needs stronger accountability-ledger discipline across regulated decisions.",
+    "accountabilitySignal": "CAPA, specimen, and safety packets still show too many owner shifts between reviews.",
+    "ownerOfRecord": "GxP program manager",
+    "requiredEvidence": [
+      "regulated continuity ledger",
+      "owner shift log",
+      "override chain"
+    ],
+    "relatedSurfaces": [
+      "assay.kineticgain.com",
+      "capa.kineticgain.com",
+      "specimen.kineticgain.com",
+      "safety.kineticgain.com"
+    ],
+    "companyTags": [
+      "LabVantage",
+      "Veeva",
+      "Thermo Fisher"
+    ],
+    "decisionHandoffs": 5,
+    "ownershipGaps": 2,
+    "overrideEvents": 3,
+    "ledgerCoverageScore": 48,
+    "decisionClarityScore": 50,
+    "boardConfidenceScore": 53,
+    "valueAtStakeMillions": 26,
+    "headline": "Biotech needs a durable accountability ledger before more control-family expansion.",
+    "narrative": "The board should require regulated owner continuity to persist across the full review chain, not just the reset moment.",
+    "nextMove": "Lock the biotech owner-of-record ledger and review every regulated owner shift before the next expansion."
+  }
+]

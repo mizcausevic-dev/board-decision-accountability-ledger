@@ -1,0 +1,65 @@
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import {
+  renderAccountabilityLane,
+  renderDocs,
+  renderInterventionPosture,
+  renderLedgerOverview,
+  renderOwnershipLedger,
+  renderVerification
+} from "../src/services/render.js";
+import {
+  accountabilityLane,
+  interventionPosture,
+  ownershipLedger,
+  payload,
+  riskMap,
+  summary,
+  verification
+} from "../src/services/verticalBriefService.js";
+
+const root = path.resolve("site");
+rmSync(root, { recursive: true, force: true });
+mkdirSync(root, { recursive: true });
+
+if (existsSync("CNAME")) {
+  writeFileSync(path.join(root, "CNAME"), readFileSync("CNAME", "utf8").trim() + "\n");
+}
+
+const htmlRoutes = new Map<string, [string, string]>([
+  ["/", ["index.html", renderLedgerOverview()]],
+  ["/accountability-lane", ["accountability-lane/index.html", renderAccountabilityLane()]],
+  ["/ownership-ledger", ["ownership-ledger/index.html", renderOwnershipLedger()]],
+  ["/intervention-posture", ["intervention-posture/index.html", renderInterventionPosture()]],
+  ["/verification", ["verification/index.html", renderVerification()]],
+  ["/docs", ["docs/index.html", renderDocs()]]
+]);
+
+for (const [, [target, html]] of htmlRoutes) {
+  const filePath = path.join(root, target);
+  mkdirSync(path.dirname(filePath), { recursive: true });
+  writeFileSync(filePath, html);
+}
+
+writeFileSync(path.join(root, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://accountability.kineticgain.com/sitemap.xml\n");
+writeFileSync(
+  path.join(root, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://accountability.kineticgain.com/</loc></url><url><loc>https://accountability.kineticgain.com/accountability-lane/</loc></url><url><loc>https://accountability.kineticgain.com/ownership-ledger/</loc></url><url><loc>https://accountability.kineticgain.com/intervention-posture/</loc></url><url><loc>https://accountability.kineticgain.com/verification/</loc></url><url><loc>https://accountability.kineticgain.com/docs/</loc></url></urlset>`
+);
+
+const api = {
+  "api/dashboard/summary.json": summary(),
+  "api/accountability-lane.json": accountabilityLane(),
+  "api/ownership-ledger.json": ownershipLedger(),
+  "api/intervention-posture.json": interventionPosture(),
+  "api/risk-map.json": riskMap(),
+  "api/verification.json": verification(),
+  "api/sample.json": payload().sample,
+  "api/payload.json": payload()
+};
+
+for (const [target, data] of Object.entries(api)) {
+  const filePath = path.join(root, target);
+  mkdirSync(path.dirname(filePath), { recursive: true });
+  writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
