@@ -1,10 +1,17 @@
 name: Deploy to accountability.kineticgain.com
 
 # Node/Vite/React -> Hostinger FTP at /accountability/
-# workflow_dispatch-only: subdomain isn't in Hostinger DNS yet; manual trigger
-# once Miz provisions via hPanel.
-
 on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "src/**"
+      - "scripts/**"
+      - "fixtures/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +19,7 @@ permissions:
 
 concurrency:
   group: deploy-board-decision-accountability-ledger
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build-deploy:
@@ -29,6 +36,9 @@ jobs:
 
       - name: Install
         run: npm ci || npm install
+
+      - name: Verify
+        run: npm run verify
 
       - name: Build
         run: |
@@ -49,6 +59,9 @@ jobs:
           fi
           echo "DEPLOY_DIR=$DEPLOY_DIR" >> $GITHUB_ENV
           test -f "$DEPLOY_DIR/index.html" || (echo "FAIL: $DEPLOY_DIR/index.html missing" && exit 1)
+          grep -q "Product depth" "$DEPLOY_DIR/index.html" || (echo "FAIL: Product depth marker missing" && exit 1)
+          grep -q "What these repos have in common" "$DEPLOY_DIR/index.html" || (echo "FAIL: shared repo pattern marker missing" && exit 1)
+          grep -q "portfolio.kineticgain.com" "$DEPLOY_DIR/index.html" || (echo "FAIL: portfolio footer marker missing" && exit 1)
 
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -63,3 +76,11 @@ jobs:
             **/.git*/**
             **/.github/**
             **/node_modules/**
+
+      - name: Verify live deployment
+        run: |
+          sleep 10
+          html="$(curl -fsSL --retry 3 --retry-delay 5 "https://accountability.kineticgain.com/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$html" | grep -q "Product depth" || (echo "FAIL: live Product depth marker missing" && exit 1)
+          printf '%s' "$html" | grep -q "What these repos have in common" || (echo "FAIL: live shared repo pattern marker missing" && exit 1)
+          printf '%s' "$html" | grep -q "portfolio.kineticgain.com" || (echo "FAIL: live portfolio footer marker missing" && exit 1)
