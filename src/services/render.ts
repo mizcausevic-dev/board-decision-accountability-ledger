@@ -10,6 +10,7 @@ import {
 
 const productTitle = "Board Decision Accountability Ledger";
 const domain = "https://accountability.kineticgain.com";
+const repoUrl = "https://github.com/mizcausevic-dev/board-decision-accountability-ledger";
 
 function escapeHtml(value: string) {
   return value
@@ -126,6 +127,27 @@ function shell(title: string, path: string, body: string, description: string) {
         gap: 18px;
         flex-wrap: wrap;
       }
+      .proof-band {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .proof-card {
+        border: 1px solid rgba(103, 224, 190, 0.16);
+        border-radius: 20px;
+        padding: 18px;
+        background: rgba(7, 17, 29, 0.52);
+      }
+      .proof-card h3 {
+        margin: 10px 0 8px;
+        font-size: 22px;
+      }
+      .proof-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
     </style>
   </head>
   <body>
@@ -134,7 +156,9 @@ function shell(title: string, path: string, body: string, description: string) {
       <div class="footer">
         <span>${productTitle}</span>
         <a href="${domain}">${domain.replace("https://", "")}</a>
-        <a href="https://github.com/mizcausevic-dev/">GitHub</a>
+        <a href="${repoUrl}">GitHub repo</a>
+        <a href="https://portfolio.kineticgain.com/">Portfolio</a>
+        <a href="https://suite.kineticgain.com/">Suite</a>
         <a href="https://www.linkedin.com/in/mirzacausevic/">LinkedIn</a>
         <a href="https://kineticgain.com/">Kinetic Gain</a>
       </div>
@@ -157,6 +181,60 @@ function navLinks(path: string) {
       return `<a${active} href="${href}">${label}</a>`;
     })
     .join("");
+}
+
+function productDepthSection() {
+  return `<section class="section">
+    <span class="eyebrow">Product depth</span>
+    <h2>Built for accountability repair, not another status deck.</h2>
+    <p class="lede">This surface gives a board, operating partner, or executive sponsor the accountability story in business terms while keeping enough technical proof for engineering, governance, and diligence reviewers.</p>
+    <div class="proof-band">
+      <article class="proof-card">
+        <div class="chip">Buyer value</div>
+        <h3>Who owns the last call?</h3>
+        <p>Names the owner-of-record, audience, action, and board-confidence gap so leaders can repair accountability before the next review.</p>
+      </article>
+      <article class="proof-card">
+        <div class="chip">Technical proof</div>
+        <h3>Same data, multiple surfaces.</h3>
+        <p>Routes, JSON APIs, CLI output, and screenshots all render from the modeled packet, reducing hand-edited narrative drift.</p>
+      </article>
+      <article class="proof-card">
+        <div class="chip">GTM story</div>
+        <h3>Decision ownership becomes measurable.</h3>
+        <p>The repo demonstrates how Kinetic Gain turns governance ambiguity into a concrete board-ready product surface.</p>
+      </article>
+    </div>
+  </section>`;
+}
+
+function sharedPatternSection() {
+  return `<section class="section">
+    <span class="eyebrow">What these repos have in common</span>
+    <h2>Risk, ownership, evidence, decision.</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="chip">Risk</div>
+        <h3>Expose the pressure.</h3>
+        <p>Every Kinetic Gain surface makes the operational risk explicit before it becomes vague executive narrative.</p>
+      </article>
+      <article class="card">
+        <div class="chip">Ownership</div>
+        <h3>Attach the accountable lane.</h3>
+        <p>Signals stay tied to owners, audiences, and next moves instead of disappearing into status-report sprawl.</p>
+      </article>
+      <article class="card">
+        <div class="chip">Evidence</div>
+        <h3>Produce portable proof.</h3>
+        <p>Generated pages, JSON, screenshots, and docs give technical and non-technical reviewers the same source of truth.</p>
+      </article>
+      <article class="card">
+        <div class="chip">Decision</div>
+        <h3>Stage the next move.</h3>
+        <p>The output supports board and investor questions: where are we exposed, what do we fix, and what story do we tell?</p>
+      </article>
+    </div>
+  </section>`;
 }
 
 export function renderLedgerOverview() {
@@ -207,7 +285,9 @@ export function renderLedgerOverview() {
     <section class="section">
       <h2>Board-visible accountability exposures</h2>
       <ul>${risks}</ul>
-    </section>`,
+    </section>
+    ${productDepthSection()}
+    ${sharedPatternSection()}`,
     "Board-ready accountability-ledger surface for stabilizing owner-of-record continuity, override discipline, and board-trustworthy decision follow-through."
   );
 }
@@ -353,7 +433,9 @@ export function renderDocs() {
         <li><code>/intervention-posture</code> scores handoffs, overrides, coverage, clarity, and board-confidence strain.</li>
         <li><code>/api/payload</code> exposes the reproducible accountability-ledger packet.</li>
       </ul>
-    </section>`,
+    </section>
+    ${productDepthSection()}
+    ${sharedPatternSection()}`,
     "Product documentation for Board Decision Accountability Ledger and its board-ready routes."
   );
 }

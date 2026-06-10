@@ -32,4 +32,21 @@ describe("render", () => {
   it("renders docs payload guidance", () => {
     expect(renderDocs()).toContain("/api/payload");
   });
+
+  it("renders product depth and shared Kinetic Gain wayfinding", () => {
+    const html = renderLedgerOverview();
+    expect(html).toContain("Product depth");
+    expect(html).toContain("What these repos have in common");
+    expect(html).toContain("Risk, ownership, evidence, decision.");
+    expect(html).toContain("https://github.com/mizcausevic-dev/board-decision-accountability-ledger");
+    expect(html).toContain("https://portfolio.kineticgain.com/");
+    expect(html).toContain("https://suite.kineticgain.com/");
+  });
+
+  it("keeps docs connected to the same proof pattern", () => {
+    const html = renderDocs();
+    expect(html).toContain("Product depth");
+    expect(html).toContain("What these repos have in common");
+    expect(html).toContain("portable proof");
+  });
 });
