@@ -64,7 +64,7 @@ jobs:
           grep -q "portfolio.kineticgain.com" "$DEPLOY_DIR/index.html" || (echo "FAIL: portfolio footer marker missing" && exit 1)
 
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER || secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME || secrets.FTP_USER }}
