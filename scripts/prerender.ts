@@ -26,6 +26,10 @@ if (existsSync("CNAME")) {
   writeFileSync(path.join(root, "CNAME"), readFileSync("CNAME", "utf8").trim() + "\n");
 }
 
+if (existsSync("favicon.svg")) {
+  writeFileSync(path.join(root, "favicon.svg"), readFileSync("favicon.svg", "utf8"));
+}
+
 const htmlRoutes = new Map<string, [string, string]>([
   ["/", ["index.html", renderLedgerOverview()]],
   ["/accountability-lane", ["accountability-lane/index.html", renderAccountabilityLane()]],

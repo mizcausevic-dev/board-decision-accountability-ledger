@@ -28,6 +28,27 @@ function shell(title: string, path: string, body: string, description: string) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(title)} · Kinetic Gain</title>
     <meta name="description" content="${escapeHtml(description)}" />
+    <link rel="icon" href="/favicon.svg" />
+    <script type="application/ld+json">${JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Accountability Ledger",
+      description:
+        "Board-ready accountability-ledger surface for tracking final decision owners, approval continuity, and board-safe ownership discipline.",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://accountability.kineticgain.com/",
+      publisher: {
+        "@type": "Organization",
+        name: "Kinetic Gain LLC",
+        url: "https://kineticgain.com/"
+      },
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Kinetic Gain",
+        url: "https://kineticgain.com/"
+      }
+    })}</script>
     <style>
       :root {
         color-scheme: dark;
