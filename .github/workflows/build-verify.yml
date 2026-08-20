@@ -1,0 +1,89 @@
+name: Build verification
+
+# BUILD ONLY. This workflow does not deploy.
+#
+# Deployment to accountability.kineticgain.com is manual, over SSH/SFTP on port
+# 65002 to the Hostinger web estate. The FTP deploy step that used to live here
+# was removed 2026-08-20 for three reasons, in order of weight:
+#
+#   1. It raced the SSH path. Both wrote to the same docroot and the last writer
+#      won, with nothing surfacing the conflict. On 2026-08-20 this workflow
+#      deployed twice on top of an SSH deploy made minutes earlier; the content
+#      happened to match, so it was silent. Divergent content would have been
+#      just as silent.
+#   2. FTP from shared GitHub runner IPs is unreliable against this host
+#      (control-socket timeouts traced to IP reputation; the documented fix is
+#      SSH-key SFTP on 65002, which is what the manual path already uses).
+#   3. It required live production FTP credentials in repo secrets.
+#
+# What remains still earns its place: it proves the build compiles and that the
+# built HTML actually contains the content markers below, so a broken build is
+# caught here rather than discovered at deploy time.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "src/**"
+      - "scripts/**"
+      - "fixtures/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-board-decision-accountability-ledger
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build + verify output
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm ci || npm install
+
+      - name: Verify
+        run: npm run verify
+
+      - name: Build
+        run: |
+          if npm run | grep -q "^  prerender$"; then
+            npm run prerender
+          else
+            npm run build
+          fi
+
+      - name: Verify build output
+        run: |
+          if [ -d "site" ]; then DEPLOY_DIR="site"
+          elif [ -d "dist" ]; then DEPLOY_DIR="dist"
+          elif [ -d "build" ]; then DEPLOY_DIR="build"
+          else
+            echo "FAIL: no site/, dist/, or build/ produced"
+            exit 1
+          fi
+          echo "DEPLOY_DIR=$DEPLOY_DIR" >> $GITHUB_ENV
+          test -f "$DEPLOY_DIR/index.html" || (echo "FAIL: $DEPLOY_DIR/index.html missing" && exit 1)
+          grep -q "Product depth" "$DEPLOY_DIR/index.html" || (echo "FAIL: Product depth marker missing" && exit 1)
+          grep -q "What these repos have in common" "$DEPLOY_DIR/index.html" || (echo "FAIL: shared repo pattern marker missing" && exit 1)
+          grep -q "portfolio.kineticgain.com" "$DEPLOY_DIR/index.html" || (echo "FAIL: portfolio footer marker missing" && exit 1)
+          echo "OK: $DEPLOY_DIR built and content markers present"
+
+      # No deploy step, and deliberately no live-site check either. A curl
+      # against the production URL from here would report on whatever the last
+      # SSH deploy put there, not on the commit this run just built - a green
+      # check that proves nothing about this build. Verifying the artifact
+      # above is the honest boundary of what a build job can assert.
